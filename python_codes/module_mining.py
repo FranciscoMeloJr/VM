@@ -1,4 +1,5 @@
 import pandas
+import matplotlib.pyplot as plt
 from collections import Counter
 
 print "Module 1"
@@ -119,7 +120,7 @@ def histogram_process(sys_calls_list):
    letter_counts = Counter(sys_calls_list)
    df = pandas.DataFrame.from_dict(letter_counts, orient='index')
    df.plot(kind='bar')
-   df.show()
+   plt.show()
 
 def main():
    sys_calls = read_lines()
