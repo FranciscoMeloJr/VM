@@ -12,7 +12,7 @@ def data_entry():#get
     c.close()
     conn.close()
 
-create_table()
-data_entry()
+#create_table()
+#data_entry()
 
-#f = open("document.doc", "w")
+f = open("document.doc", "w")
