@@ -1,3 +1,5 @@
+import pandas
+from collections import Counter
 
 print "Module 1"
 
@@ -6,25 +8,68 @@ print f
 content = f.read()
 #print content
 
-#dictionary of syscalls: 
+#parse the lines in [n,[info]]
 def parse_lines(sys_calls):
-   "fuction to do parse syscalls lines"
    i = 0
-   info = []
-   content = []
-   while i < 1:#len(sys_calls):
-      line = sys_calls[200]
-      info = line.split()
-      #print info
-      content.append(info[0])
-      content.append(info[1])
-      content.append(info[2])
-      content.append(info[3])
-      content.append(info[5]+info[6]+info[7])
-      content.append(info[10]+info[11]+info[12])
-      content.append(info[13]+info[14]+info[15])
-      print content
+   sys_calls_divided = []
+   while i < 99:#len(sys_calls):
+      sys_calls_divided.append(parse_line(i,sys_calls[i]))
       i+=1
+   return sys_calls_divided
+      
+#dictionary of syscalls: 
+def parse_line(i,line):
+   "fuction to do parse syscalls lines"
+   info = []
+   
+   info = line.split()
+   #print info
+   content = []
+   content.append(i)
+   content.append(info)
+   #print content
+   
+   return content
+
+#find timestamp: 
+def find_time(line):
+   "fuction to do parse syscalls lines"
+   print 'time'
+   info = []
+   info = line[1]
+   #print info[0]
+   
+   return info[0]
+
+#find timestamp: 
+def find_timestamp(line):
+   "fuction to do parse syscalls lines"
+   print 'timestamp'
+   info = []
+   info = line[1]
+   #print info[1]
+   
+   return info[1]
+
+#find process: 
+def find_process(line):
+   "fuction to do parse syscalls lines"
+   print 'process'
+   info = line[1]
+   #print info[2]
+   
+   return info[2]
+
+#find syscall: 
+def find_syscall(line):
+   "fuction to do parse syscalls lines"
+   print 'process'
+   info = line[1]
+   #print info
+   #print info[3]
+   
+   return info[3]
+
 
 #read the lines in the trace:
 def read_lines():
@@ -46,7 +91,45 @@ def read_lines():
    f.close()
    return dict_calls
 
-sys_calls = read_lines()
-print len(sys_calls)
-print sys_calls[200]
-parse_lines(sys_calls)
+#find all the syscalls
+def list_syscall(sys_calls_div):
+   content = []
+   i = 0
+   while i < len(sys_calls_div):
+      x = find_syscall(sys_calls_div[i])
+      #print x
+      content.append(x)
+      i+=1
+   return content
+
+#find all the timestamps of certain process:
+def list_syscall(sys_calls_div):
+   content = []
+   i = 0
+   while i < len(sys_calls_div):
+      x = find_syscall(sys_calls_div[i])
+      #print x
+      content.append(x)
+      i+=1
+   return content
+
+#this function do a histogram
+def histogram_process(sys_calls_list):
+   #a = ['a', 'a', 'a', 'a', 'b', 'b', 'c', 'c', 'c', 'd', 'e', 'e', 'e', 'e', 'e']
+   letter_counts = Counter(sys_calls_list)
+   df = pandas.DataFrame.from_dict(letter_counts, orient='index')
+   df.plot(kind='bar')
+
+def main():
+   sys_calls = read_lines()
+   print len(sys_calls)
+   #print sys_calls[200]
+   sys_calls_div = parse_lines(sys_calls)
+   #print sys_calls_div
+   find_timestamp(sys_calls_div[1])
+   process = find_syscall(sys_calls_div[50])
+   x = list_syscall(sys_calls_div)
+   histogram_process(x)
+   
+main()
+
