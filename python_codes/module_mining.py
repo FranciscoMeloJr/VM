@@ -2,8 +2,12 @@
 import string
 from random import randint
 
+#to plot:
 import matplotlib.pyplot as plt
 from collections import Counter
+
+#for permutations:
+import itertools
 
 print "Module 1"
 
@@ -321,10 +325,12 @@ def test2(transl):
 
 #this function makes the support of an itemset
 def test3(combination):
-   print 'test3'
+   print 'test3 with permutations'
    i  = 0
-   print combination
-   #mexer aqui
+   print combination[0]
+   
+   x = list(itertools.permutations(combination[0]))
+   print x
    
 def main():
    sys_calls = read_lines()
