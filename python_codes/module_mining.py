@@ -90,7 +90,11 @@ def find_process(line):
 #find syscall: 
 def find_syscall(line):
    "fuction to do parse syscalls lines"
+<<<<<<< HEAD
+   #print 'process'
+=======
    #print 'syscall'
+>>>>>>> 859064bd768e3324c436b00d9dc352b2bbd8c4a5
    info = line[1]
    #print info
    print info[3]
